@@ -17,6 +17,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Form1());
+
 		}
 	}
 }

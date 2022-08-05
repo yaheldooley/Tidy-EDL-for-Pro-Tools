@@ -12,6 +12,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			public string BitDepth;
 			public string SessionStartTimeCode;
 			public string SessionFrameRate;
+			public string NonEDLData;
 
 			public List<AudioTrackData> AudioTracks = new List<AudioTrackData>();
 
@@ -22,7 +23,6 @@ namespace Tidy_EDL_for_Pro_Tools
 				s += $"Format: {SampleRate}, {BitDepth}\n";
 				s += $"FPS: {SessionFrameRate}\n";
 				s += $"Session Start: {SessionStartTimeCode}\n\n";
-
 
 				s += $"Track Count: {AudioTracks.Count}\n";
 				s += $"Unique Cue Count: {GetOriginalCueCount()}\n\n";
@@ -36,7 +36,6 @@ namespace Tidy_EDL_for_Pro_Tools
 					}
 				}
 
-				
 				string trackListHeader = CreateTrackListColumnHeader(highestCharCount);
 				string breakString = "";
 				for (int i = 0; i < trackListHeader.Length + 2; i++)
@@ -46,13 +45,11 @@ namespace Tidy_EDL_for_Pro_Tools
 				s += breakString;
 
 				s += $"\n{trackListHeader}\n\n";
-				//s += breakString +"\n";
 
-			
 				for (int i = 0; i < AudioTracks.Count; i++)
 				{
 					AudioTrackData track = AudioTracks[i];
-					s += track.PrintTrackData(highestCharCount);
+					s += track.PrintTrackData(highestCharCount, currentParameters);
 				}
 
 				return s;

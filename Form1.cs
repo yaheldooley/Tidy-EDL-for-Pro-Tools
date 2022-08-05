@@ -12,19 +12,46 @@ using Tidy_EDL_for_Pro_Tools;
 
 namespace Tidy_EDL_for_Pro_Tools
 {
+	
+
 	public partial class Form1 : Form
 	{
 		public Form1()
 		{
 			InitializeComponent();
-
+			LoadAppSettings();
 			this.listBox1.DragDrop += new DragEventHandler(this.listBox1_DragDrop);
 			this.listBox1.DragEnter += new DragEventHandler(this.listBox1_DragEnter);
+			ExtractEDLData.UpdateLabelText += SetLabelText;
+			label1.Text = "";
+		}
+
+		private void SetLabelText(string value)
+		{
+			label1.Text += value;
+		}
+
+		bool loaded = false;
+		private void LoadAppSettings()
+		{
+			if (loaded) return;
+			loaded = true;
+
+			currentParameters = new SessionInfoParams();
+			currentParameters.SimplifyFileNames = true;
+			currentParameters.ExcludeInactiveTracks = true;
+			currentParameters.ExcludeEmptyTracks = true;
+			currentParameters.ExcludeFades = true;
+			currentParameters.TrackComments = false;
+			currentParameters.TrackUserDelay = false;
+			currentParameters.TrackState = false;
+			currentParameters.TrackPlugIns = false;
+			currentParameters.PreserveNonEDLData = false;
 		}
 
 		private List<string> AllRawTextData = new List<string>();
 		private List<SessionData> AllSessionData = new List<SessionData>();
-
+		public static SessionInfoParams currentParameters;
 
 		private void listBox1_DragDrop(object sender, DragEventArgs e)
 		{
@@ -66,6 +93,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			for (int i = 0; i < AllRawTextData.Count; i++)
 			{
 				string allTextInFile = File.ReadAllText(AllRawTextData[i]);
+				
 				SessionData newData = ExtractEDLData.GetSessionData(allTextInFile);
 				if (newData == null) //EDL is not AVID PRO TOOLS FORMAT
 				{
@@ -77,7 +105,6 @@ namespace Tidy_EDL_for_Pro_Tools
 				{
 					AllSessionData.Add(newData);
 					CreateNewEDL(newData, AllRawTextData[i]);
-					//label1.Text = newData.Print();
 				}
 			}
 		}
@@ -85,14 +112,13 @@ namespace Tidy_EDL_for_Pro_Tools
 		private void CreateNewEDL(SessionData sessionData, string textFilePath)
 		{
 			string fullFileName = Path.GetDirectoryName(textFilePath) + "\\" + removeInvalidChar(sessionData.SessionName) + "_TidyEDL.txt";
-			//string OnlyValidCharacters = removeInvalidChar(fullFileName);
 
 			if (File.Exists(fullFileName))
 			{
 				File.Delete(fullFileName);
 			}
 			string dataToWrite = sessionData.PrintSessionInfo();
-			label1.Text = $"Full Filename: {fullFileName}\nData: {dataToWrite}";
+			//label1.Text = $"Full Filename: {fullFileName}\nData: {dataToWrite}";
 
 			//return;
 
@@ -110,5 +136,8 @@ namespace Tidy_EDL_for_Pro_Tools
 		{
 			return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
 		}
+
+
+		
 	}
 }
