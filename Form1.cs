@@ -12,62 +12,75 @@ using Tidy_EDL_for_Pro_Tools;
 
 namespace Tidy_EDL_for_Pro_Tools
 {
-	
-
 	public partial class Form1 : Form
 	{
 		public Form1()
 		{
 			InitializeComponent();
 			LoadAppSettings();
-			this.listBox1.DragDrop += new DragEventHandler(this.listBox1_DragDrop);
-			this.listBox1.DragEnter += new DragEventHandler(this.listBox1_DragEnter);
-			ExtractEDLData.UpdateLabelText += SetLabelText;
-			label1.Text = "";
+			this.listView1.DragDrop += new DragEventHandler(this.listView1_DragDrop);
+			this.listView1.DragEnter += new DragEventHandler(this.listView1_DragEnter);
+			Session.SetValidStatus += ShowValidProcess;
 		}
-
-		private void SetLabelText(string value)
+		public void LoadAppSettings()
 		{
-			label1.Text += value;
+			Session.SetDefaultValues();
+			comboBox1.Items.Add(Session.PTParams.EDLFormat.ToString());
+			comboBox1.SelectedItem = Session.PTParams.EDLFormat.ToString();
+			check_simplifyNames.Checked = Session.PTParams.ExcludeExtensions;
+			check_ExInactive.Checked = Session.PTParams.ExcludeEmptyTracks;
+			check_ExEmptyTracks.Checked = Session.PTParams.ExcludeEmptyTracks;
+			check_ExFades.Checked = Session.PTParams.ExcludeFades;
+			checkBox_ExComments.Checked = Session.PTParams.TrackComments;
+			checkBox_ExUserDelay.Checked = Session.PTParams.TrackUserDelay;
+			checkBox_State.Checked = Session.PTParams.TrackState;
+			checkBox_PllugIns.Checked = Session.PTParams.TrackPlugIns;
+			checkBox_PresNonEDL.Checked = Session.PTParams.PreserveNonEDLData;
 		}
 
-		bool loaded = false;
-		private void LoadAppSettings()
+		public void ShowValidProcess(ListViewItem item, bool valid)
 		{
-			if (loaded) return;
-			loaded = true;
+			if (listView1.Items.Contains(item))
+			{
+				if (valid)
+				{
+					item.BackColor = Color.Green;
+					item.ForeColor = Color.White;
+					//ListViewItem item = new ListViewItem();
+					//item.for
 
-			currentParameters = new SessionInfoParams();
-			currentParameters.SimplifyFileNames = true;
-			currentParameters.ExcludeInactiveTracks = true;
-			currentParameters.ExcludeEmptyTracks = true;
-			currentParameters.ExcludeFades = true;
-			currentParameters.TrackComments = false;
-			currentParameters.TrackUserDelay = false;
-			currentParameters.TrackState = false;
-			currentParameters.TrackPlugIns = false;
-			currentParameters.PreserveNonEDLData = false;
+					//var t = listBox1.Text;
+
+					//listBox1.Items
+					//strikethrough
+				}
+				else
+				{
+					item.BackColor = Color.Red;
+					item.ForeColor = Color.White;
+					//something else
+				}
+			}
 		}
 
-		private List<string> AllRawTextData = new List<string>();
-		private List<SessionData> AllSessionData = new List<SessionData>();
-		public static SessionInfoParams currentParameters;
+		#region UI Changes
 
-		private void listBox1_DragDrop(object sender, DragEventArgs e)
+		private void listView1_DragDrop(object sender, DragEventArgs e)
 		{
 			string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
 			for (int i = 0; i < s.Length; i++)
 			{
 				string ext = Path.GetExtension(s[i]);
-				if (ext == ".txt")
+				if (ext == ".txt" && !listView1.Items.ContainsKey(s[i]))
 				{
-					listBox1.Items.Add(s[i]);
+					listView1.Items.Add(s[i]);
 				}
 			}
+			DragDropText.Visible = listView1.Items.Count < 1;
 		}
 
-		private void listBox1_DragEnter(object sender, DragEventArgs e)
+		private void listView1_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{
@@ -81,63 +94,131 @@ namespace Tidy_EDL_for_Pro_Tools
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (listBox1.Items.Count < 1) return;
+			if (listView1.Items.Count < 1) return;
 
-			foreach (var item in listBox1.Items) { AllRawTextData.Add(item.ToString()); }
-			FormatAllTextFilesInList();
+			Session.ProcessObjectsAsEDL(listView1.Items);
+		}
+
+
+
+		private void check_simplifyNames_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.ExcludeExtensions = check_simplifyNames.Checked;
+		}
+
+		private void check_ExInactive_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.ExcludeInactiveTracks = check_ExInactive.Checked;
+		}
+
+		private void check_ExEmptyTracks_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.ExcludeEmptyTracks = check_ExEmptyTracks.Checked;
+		}
+
+		private void check_ExFades_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.ExcludeFades = check_ExFades.Checked;
+		}
+
+		private void checkBox_ExComments_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.TrackComments = checkBox_ExComments.Checked;
+		}
+
+		private void checkBox_ExUserDelay_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.TrackUserDelay = checkBox_ExUserDelay.Checked;
+		}
+
+		private void checkBox_State_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.TrackState = checkBox_State.Checked;
+		}
+
+		private void checkBox_PllugIns_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.TrackPlugIns = checkBox_PllugIns.Checked;
+		}
+
+		private void checkBox_PresNonEDL_CheckedChanged(object sender, EventArgs e)
+		{
+			Session.PTParams.PreserveNonEDLData = checkBox_PresNonEDL.Checked;
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			Session.SetEDLFormat(comboBox1.Text);
+		}
+
+		private void buttonClear_Click_1(object sender, EventArgs e)
+		{
+			Session.AllRawTextData.Clear();
+			listView1.Items.Clear();
+			DragDropText.Visible = listView1.Items.Count < 1;
+		}
+
+		private void label3_Click(object sender, EventArgs e)
+		{
 
 		}
 
-		private void FormatAllTextFilesInList()
+		private void label4_Click(object sender, EventArgs e)
 		{
-			for (int i = 0; i < AllRawTextData.Count; i++)
+
+		}
+
+		#endregion
+
+		#region Draggable Window
+		private bool mouseDown;
+		private Point lastLocation;
+
+		private void Form1_MouseDown(object sender, MouseEventArgs e)
+		{
+			mouseDown = true;
+			lastLocation = e.Location;
+		}
+
+		private void Form1_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (mouseDown)
 			{
-				string allTextInFile = File.ReadAllText(AllRawTextData[i]);
-				
-				SessionData newData = ExtractEDLData.GetSessionData(allTextInFile);
-				if (newData == null) //EDL is not AVID PRO TOOLS FORMAT
-				{
-					// text files does not contain Pro Tools EDL Data
-					listBox2.Items.Add(AllRawTextData[i]);
-					continue;
-				}
-				else
-				{
-					AllSessionData.Add(newData);
-					CreateNewEDL(newData, AllRawTextData[i]);
-				}
+				this.Location = new Point(
+					(this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+				this.Update();
 			}
 		}
 
-		private void CreateNewEDL(SessionData sessionData, string textFilePath)
+		private void Form1_MouseUp(object sender, MouseEventArgs e)
 		{
-			string fullFileName = Path.GetDirectoryName(textFilePath) + "\\" + removeInvalidChar(sessionData.SessionName) + "_TidyEDL.txt";
-
-			if (File.Exists(fullFileName))
-			{
-				File.Delete(fullFileName);
-			}
-			string dataToWrite = sessionData.PrintSessionInfo();
-			//label1.Text = $"Full Filename: {fullFileName}\nData: {dataToWrite}";
-
-			//return;
-
-			// Create a new file     
-			using (FileStream fs = File.Create(fullFileName))
-			{
-				// Add some text to file    
-				Byte[] title = new UTF8Encoding(true).GetBytes(dataToWrite);
-				fs.Write(title, 0, title.Length);
-			}
-
+			mouseDown = false;
 		}
 
-		private static string removeInvalidChar(string fileName)
+		#endregion
+
+		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+			
 		}
+	}
+	public static class ListControlExtensions
+	{
+		public static object GetItemValue(this ListControl list, object item)
+		{
+			if (item == null)
+				throw new ArgumentNullException("item");
 
+			if (string.IsNullOrEmpty(list.ValueMember))
+				return item;
 
-		
+			var property = TypeDescriptor.GetProperties(item)[list.ValueMember];
+			if (property == null)
+				throw new ArgumentException(
+					string.Format("item doesn't contain '{0}' property or column.",
+					list.ValueMember));
+			return property.GetValue(item);
+		}
 	}
 }

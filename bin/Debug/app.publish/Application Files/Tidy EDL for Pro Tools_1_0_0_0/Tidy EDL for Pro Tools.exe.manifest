@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Tidy EDL for Pro Tools.exe" version="1.0.0.0" publicKeyToken="8efcdec40ae06f88" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Tidy EDL for Pro Tools" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Tidy EDL for Pro Tools.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Tidy EDL for Pro Tools.exe" size="47072">
+      <assemblyIdentity name="Tidy EDL for Pro Tools" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nGdQK+6iRYjWiMqr9iGN0KI2/iuiGh5PK6noAgUWBCc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Tidy EDL for Pro Tools.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-89GKNVP\ydool" issuerKeyHash="c4f04647039c7635b1f91feec31a72a2f62c60fe" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>Fmd7NDeR7F/qvKgFx1N9Rm+Y1AAYJ1UVwAXt/pp/JS0=</DigestValue></Reference></SignedInfo><SignatureValue>l2F/BsPxGd+OR5CUGg4Qk5HKBmC7sKZaEtwfqc5uxtZsFPusr2ZlP2bwhRLONuvJpZY8nLhVJM479w94DRiAZoBymABASjkarD66trQoE2Pzx/1sv1oHFoX64XTr3T2QEMiPn5MHfjKeeZo1KXfN9cBri95Y2zDpCPcXECjBb10=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>q8pUkEh6qCi+N2WyGvkAydwGdqyv8WudjnoPR4vVFLzkpfKZael0EgJeiU2t1OTHl49Mol5JKzhIdiYefSswCcswtXVXN94IYWaht6DPFjHlwYM8plaLNLqYRI3S/uzGSzvdHFUFqK0ePgsQkfxsBpQ5sMInwFL1gTUjL2r+m90=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="2d257f9afeed05c01555271800d4986f467d53c705a8bcea5fec9137347b6716" Description="" Url=""><as:assemblyIdentity name="Tidy EDL for Pro Tools.exe" version="1.0.0.0" publicKeyToken="8efcdec40ae06f88" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-89GKNVP\ydool</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>647EdlUkAErO1qYVyRui8QOvOhKDRWXUxfwUVeyRQl8=</DigestValue></Reference></SignedInfo><SignatureValue>dLKBjsH7hMkEwe+TjWoa3ydjX9uMf618YIodXAaZsbPLImipUz0xmUGpDXU0Z73Djmed6bNUKxuQMWbg+zYqIKiN7rKuD0KuOO9fOvLAcy7eXvGF8/07+hqRxdf2fP0BCBKPAvVQsPn1VvCLxWxSjppI/l8u+o7hAzcQSJb6sLE=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>q8pUkEh6qCi+N2WyGvkAydwGdqyv8WudjnoPR4vVFLzkpfKZael0EgJeiU2t1OTHl49Mol5JKzhIdiYefSswCcswtXVXN94IYWaht6DPFjHlwYM8plaLNLqYRI3S/uzGSzvdHFUFqK0ePgsQkfxsBpQ5sMInwFL1gTUjL2r+m90=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQEsCWM6xXgahBWu43zDsuszANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADgAOQBHAEsATgBWAFAAXAB5AGQAbwBvAGwwHhcNMjIwODA2MDYyMDA0WhcNMjMwODA2MTIyMDA0WjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtADgAOQBHAEsATgBWAFAAXAB5AGQAbwBvAGwwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKvKVJBIeqgovjdlshr5AMncBnasr/FrnY56D0eL1RS85KXymWnpdBICXolNrdTkx5ePTKJeSSs4SHYmHn0rMAnLMLV1VzfeCGFmobegzxYx5cGDPKZWizS6mESN0v7sxks73RxVBaitHj4LEJH8bAaUObDCJ8BS9YE1Iy9q/pvdAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAb71wM0eDGypZyCN5IIQ0UpwiPY6ooSe3v1Jhtc0s5hiLk723yHasyCr6nfsABkNNxWNabSHw2owiikLqlJ3oe1TVT8vrri79R3uUM8d+DM3UpZvs/x3mO3YG18KnGJkve/ggJd8koz9U3TZ4scxtWQLGciZPJzvt0ky/D8JzdOs=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

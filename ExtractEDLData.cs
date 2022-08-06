@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Tidy_EDL_for_Pro_Tools.Form1;
@@ -10,8 +8,6 @@ namespace Tidy_EDL_for_Pro_Tools
 {
 	public class ExtractEDLData
 	{
-		public static event Action<string> UpdateLabelText;
-
 		private static SessionData currentSession;
 
 		public static string[] HeadersPT = new string[] {
@@ -125,14 +121,14 @@ namespace Tidy_EDL_for_Pro_Tools
 					if (sectionWithExtra.Contains(HeadersPT[nextLabel]))
 					{
 						string[] lastSplit = SplitStringByString(sectionWithExtra, HeadersPT[nextLabel]);
-						CapturedHeaders.Add(HeadersPT[i], lastSplit[0]);
+						CapturedHeaders.Add(HeadersPT[labelIndex], lastSplit[0]);
 						break;
 					}
 					continue;
 				}
 				else
 				{
-					CapturedHeaders.Add(HeadersPT[i], sectionWithExtra);
+					CapturedHeaders.Add(HeadersPT[labelIndex], sectionWithExtra);
 					break;
 				}
 			}
@@ -174,7 +170,7 @@ namespace Tidy_EDL_for_Pro_Tools
 				}
 				//skip line 4 if not plugins, its just row description stuff we'll generate again later
 
-				if (currentParameters.ExcludeInactiveTracks)
+				if (Session.PTParams.ExcludeInactiveTracks)
 				{
 					if (audioTrack.State == "") allTracks.Add(audioTrack);
 				}
@@ -201,15 +197,15 @@ namespace Tidy_EDL_for_Pro_Tools
 					int.TryParse(clipDataLines[0].Trim(), out channel);
 					if (channel > 1) break;
 
-					if (currentParameters.SimplifyFileNames) clip.ClipName = SimplifyClipName(Tidy(clipDataLines[2]));
+					if (Session.PTParams.ExcludeExtensions) clip.ClipName = SimplifyClipName(Tidy(clipDataLines[2]));
 					else clip.ClipName = Tidy(clipDataLines[2]);
 
 					bool fadeTrack = clip.ClipName == "(fade out)" || clip.ClipName == "(fade in)" || clip.ClipName == "(cross fade)";
-					if (currentParameters.ExcludeFades && fadeTrack)
+					if (Session.PTParams.ExcludeFades && fadeTrack)
 					{
 						continue;
 					}
-					else if (currentParameters.ExcludeEmptyTracks && clip.ClipName == "") continue;
+					else if (Session.PTParams.ExcludeEmptyTracks && clip.ClipName == "") continue;
 					else
 					{
 						if (clip.ClipName.Length > audioTrack.MaxCharactersInTrackNames)
@@ -276,7 +272,6 @@ namespace Tidy_EDL_for_Pro_Tools
 			return strCopy;
 		}
 
-
 		public static string FindStringBetween(string strSource, string strStart, string strEnd)
 		{
 			
@@ -319,7 +314,9 @@ namespace Tidy_EDL_for_Pro_Tools
 
 	public class SessionInfoParams
 	{
-		public bool SimplifyFileNames = true;
+		public EDLFormat EDLFormat = EDLFormat.ProTools; 	
+
+		public bool ExcludeExtensions = true;
 		public bool ExcludeInactiveTracks = true;
 		public bool ExcludeEmptyTracks = true;
 		public bool ExcludeFades = true;
@@ -329,6 +326,11 @@ namespace Tidy_EDL_for_Pro_Tools
 		public bool TrackPlugIns = false;
 		
 		public bool PreserveNonEDLData = false;
+	}
+
+	public enum EDLFormat
+	{
+		ProTools,
 	}
 		
 }

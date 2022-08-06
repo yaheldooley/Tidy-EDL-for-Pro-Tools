@@ -49,7 +49,7 @@ namespace Tidy_EDL_for_Pro_Tools
 				for (int i = 0; i < AudioTracks.Count; i++)
 				{
 					AudioTrackData track = AudioTracks[i];
-					s += track.PrintTrackData(highestCharCount, currentParameters);
+					s += track.PrintTrackData(highestCharCount, Session.PTParams);
 				}
 
 				return s;
