@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using static Tidy_EDL_for_Pro_Tools.Form1;
 
 namespace Tidy_EDL_for_Pro_Tools
@@ -326,11 +326,34 @@ namespace Tidy_EDL_for_Pro_Tools
 		public bool TrackPlugIns = false;
 		
 		public bool PreserveNonEDLData = false;
+
+		public IEnumerable<string> TrueBools
+		{
+			get
+			{
+				return GetType()
+					.GetProperties().Where(p => p.PropertyType == typeof(bool)
+												 && (bool)p.GetValue(this, null))
+					.Select(p => p.Name);
+			}
+		}
+		public IEnumerable<string> FalseBools
+		{
+			get
+			{
+				return GetType()
+					.GetProperties().Where(p => p.PropertyType == typeof(bool)
+												 && (bool)p.GetValue(this, null))
+					.Select(p => p.Name);
+			}
+		}
+
 	}
 
 	public enum EDLFormat
 	{
 		ProTools,
 	}
-		
+
+
 }

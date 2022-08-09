@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tidy_EDL_for_Pro_Tools;
 
 namespace Tidy_EDL_for_Pro_Tools
 {
@@ -25,6 +19,7 @@ namespace Tidy_EDL_for_Pro_Tools
 		public void LoadAppSettings()
 		{
 			Session.SetDefaultValues();
+
 			comboBox1.Items.Add(Session.PTParams.EDLFormat.ToString());
 			comboBox1.SelectedItem = Session.PTParams.EDLFormat.ToString();
 			check_simplifyNames.Checked = Session.PTParams.ExcludeExtensions;
@@ -92,14 +87,22 @@ namespace Tidy_EDL_for_Pro_Tools
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void ExcludeButton_Click(object sender, EventArgs e)
 		{
 			if (listView1.Items.Count < 1) return;
 
 			Session.ProcessObjectsAsEDL(listView1.Items);
+			Save();
+			//Save settings
+
 		}
 
+		private void Save()
+		{
+			//Save settings
+		}
 
+		
 
 		private void check_simplifyNames_CheckedChanged(object sender, EventArgs e)
 		{
@@ -197,6 +200,8 @@ namespace Tidy_EDL_for_Pro_Tools
 		}
 
 		#endregion
+
+		
 
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
 		{

@@ -68,7 +68,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.RunButton.Text = "EXCLUDE";
 			this.RunButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.RunButton.UseVisualStyleBackColor = false;
-			this.RunButton.Click += new System.EventHandler(this.button1_Click);
+			this.RunButton.Click += new System.EventHandler(this.ExcludeButton_Click);
 			// 
 			// label2
 			// 

@@ -37,6 +37,7 @@ namespace Tidy_EDL_for_Pro_Tools
 
 		public static void ProcessObjectsAsEDL(ListViewItemCollection collection)
 		{
+			AllRawTextData.Clear();
 			for (int i = 0; i < collection.Count; i++)
 			{
 				AllRawTextData.Add(collection[i], collection[i].Text);
