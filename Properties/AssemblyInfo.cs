@@ -5,8 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+
 [assembly: AssemblyTitle("Tidy EDL for Pro Tools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A workflow tool by Yahel Dooley")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tidy EDL for Pro Tools")]

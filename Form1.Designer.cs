@@ -53,15 +53,15 @@ namespace Tidy_EDL_for_Pro_Tools
 			// RunButton
 			// 
 			this.RunButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.RunButton.BackColor = System.Drawing.Color.Green;
+			this.RunButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(140)))), ((int)(((byte)(243)))));
 			this.RunButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(255)))), ((int)(((byte)(152)))));
-			this.RunButton.FlatAppearance.BorderSize = 3;
-			this.RunButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen;
+			this.RunButton.FlatAppearance.BorderSize = 2;
+			this.RunButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(218)))), ((int)(((byte)(181)))));
 			this.RunButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.RunButton.Font = new System.Drawing.Font("Ebrima", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.RunButton.ForeColor = System.Drawing.Color.Snow;
 			this.RunButton.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-			this.RunButton.Location = new System.Drawing.Point(207, 481);
+			this.RunButton.Location = new System.Drawing.Point(255, 481);
 			this.RunButton.Name = "RunButton";
 			this.RunButton.Size = new System.Drawing.Size(144, 53);
 			this.RunButton.TabIndex = 1;
@@ -83,10 +83,12 @@ namespace Tidy_EDL_for_Pro_Tools
 			// DragDropText
 			// 
 			this.DragDropText.AutoSize = true;
+			this.DragDropText.BackColor = System.Drawing.Color.Transparent;
 			this.DragDropText.Enabled = false;
+			this.DragDropText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.DragDropText.Font = new System.Drawing.Font("Fliped", 20F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.DragDropText.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.DragDropText.Location = new System.Drawing.Point(18, 82);
+			this.DragDropText.Location = new System.Drawing.Point(42, 82);
 			this.DragDropText.Name = "DragDropText";
 			this.DragDropText.Size = new System.Drawing.Size(316, 27);
 			this.DragDropText.TabIndex = 4;
@@ -96,6 +98,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			// check_simplifyNames
 			// 
 			this.check_simplifyNames.AutoSize = true;
+			this.check_simplifyNames.BackColor = System.Drawing.Color.Transparent;
 			this.check_simplifyNames.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.check_simplifyNames.ForeColor = System.Drawing.SystemColors.Control;
 			this.check_simplifyNames.Location = new System.Drawing.Point(23, 318);
@@ -103,12 +106,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.check_simplifyNames.Size = new System.Drawing.Size(130, 25);
 			this.check_simplifyNames.TabIndex = 5;
 			this.check_simplifyNames.Text = "File Extensions";
-			this.check_simplifyNames.UseVisualStyleBackColor = true;
+			this.check_simplifyNames.UseVisualStyleBackColor = false;
 			this.check_simplifyNames.CheckedChanged += new System.EventHandler(this.check_simplifyNames_CheckedChanged);
 			// 
 			// check_ExInactive
 			// 
 			this.check_ExInactive.AutoSize = true;
+			this.check_ExInactive.BackColor = System.Drawing.Color.Transparent;
 			this.check_ExInactive.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.check_ExInactive.ForeColor = System.Drawing.SystemColors.Control;
 			this.check_ExInactive.Location = new System.Drawing.Point(23, 342);
@@ -116,12 +120,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.check_ExInactive.Size = new System.Drawing.Size(130, 25);
 			this.check_ExInactive.TabIndex = 6;
 			this.check_ExInactive.Text = "Inactive Tracks";
-			this.check_ExInactive.UseVisualStyleBackColor = true;
+			this.check_ExInactive.UseVisualStyleBackColor = false;
 			this.check_ExInactive.CheckedChanged += new System.EventHandler(this.check_ExInactive_CheckedChanged);
 			// 
 			// check_ExEmptyTracks
 			// 
 			this.check_ExEmptyTracks.AutoSize = true;
+			this.check_ExEmptyTracks.BackColor = System.Drawing.Color.Transparent;
 			this.check_ExEmptyTracks.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.check_ExEmptyTracks.ForeColor = System.Drawing.SystemColors.Control;
 			this.check_ExEmptyTracks.Location = new System.Drawing.Point(23, 365);
@@ -129,12 +134,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.check_ExEmptyTracks.Size = new System.Drawing.Size(121, 25);
 			this.check_ExEmptyTracks.TabIndex = 7;
 			this.check_ExEmptyTracks.Text = "Empty Tracks";
-			this.check_ExEmptyTracks.UseVisualStyleBackColor = true;
+			this.check_ExEmptyTracks.UseVisualStyleBackColor = false;
 			this.check_ExEmptyTracks.CheckedChanged += new System.EventHandler(this.check_ExEmptyTracks_CheckedChanged);
 			// 
 			// check_ExFades
 			// 
 			this.check_ExFades.AutoSize = true;
+			this.check_ExFades.BackColor = System.Drawing.Color.Transparent;
 			this.check_ExFades.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.check_ExFades.ForeColor = System.Drawing.SystemColors.Control;
 			this.check_ExFades.Location = new System.Drawing.Point(23, 389);
@@ -142,12 +148,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.check_ExFades.Size = new System.Drawing.Size(69, 25);
 			this.check_ExFades.TabIndex = 8;
 			this.check_ExFades.Text = "Fades";
-			this.check_ExFades.UseVisualStyleBackColor = true;
+			this.check_ExFades.UseVisualStyleBackColor = false;
 			this.check_ExFades.CheckedChanged += new System.EventHandler(this.check_ExFades_CheckedChanged);
 			// 
 			// checkBox_ExComments
 			// 
 			this.checkBox_ExComments.AutoSize = true;
+			this.checkBox_ExComments.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox_ExComments.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBox_ExComments.ForeColor = System.Drawing.SystemColors.Control;
 			this.checkBox_ExComments.Location = new System.Drawing.Point(23, 413);
@@ -155,12 +162,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.checkBox_ExComments.Size = new System.Drawing.Size(105, 25);
 			this.checkBox_ExComments.TabIndex = 9;
 			this.checkBox_ExComments.Text = "Comments";
-			this.checkBox_ExComments.UseVisualStyleBackColor = true;
+			this.checkBox_ExComments.UseVisualStyleBackColor = false;
 			this.checkBox_ExComments.CheckedChanged += new System.EventHandler(this.checkBox_ExComments_CheckedChanged);
 			// 
 			// checkBox_ExUserDelay
 			// 
 			this.checkBox_ExUserDelay.AutoSize = true;
+			this.checkBox_ExUserDelay.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox_ExUserDelay.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBox_ExUserDelay.ForeColor = System.Drawing.SystemColors.Control;
 			this.checkBox_ExUserDelay.Location = new System.Drawing.Point(23, 437);
@@ -168,12 +176,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.checkBox_ExUserDelay.Size = new System.Drawing.Size(104, 25);
 			this.checkBox_ExUserDelay.TabIndex = 10;
 			this.checkBox_ExUserDelay.Text = "User Delay";
-			this.checkBox_ExUserDelay.UseVisualStyleBackColor = true;
+			this.checkBox_ExUserDelay.UseVisualStyleBackColor = false;
 			this.checkBox_ExUserDelay.CheckedChanged += new System.EventHandler(this.checkBox_ExUserDelay_CheckedChanged);
 			// 
 			// checkBox_State
 			// 
 			this.checkBox_State.AutoSize = true;
+			this.checkBox_State.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox_State.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBox_State.ForeColor = System.Drawing.SystemColors.Control;
 			this.checkBox_State.Location = new System.Drawing.Point(23, 461);
@@ -181,12 +190,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.checkBox_State.Size = new System.Drawing.Size(105, 25);
 			this.checkBox_State.TabIndex = 11;
 			this.checkBox_State.Text = "Track State";
-			this.checkBox_State.UseVisualStyleBackColor = true;
+			this.checkBox_State.UseVisualStyleBackColor = false;
 			this.checkBox_State.CheckedChanged += new System.EventHandler(this.checkBox_State_CheckedChanged);
 			// 
 			// checkBox_PllugIns
 			// 
 			this.checkBox_PllugIns.AutoSize = true;
+			this.checkBox_PllugIns.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox_PllugIns.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBox_PllugIns.ForeColor = System.Drawing.SystemColors.Control;
 			this.checkBox_PllugIns.Location = new System.Drawing.Point(23, 485);
@@ -194,12 +204,13 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.checkBox_PllugIns.Size = new System.Drawing.Size(86, 25);
 			this.checkBox_PllugIns.TabIndex = 12;
 			this.checkBox_PllugIns.Text = "Plug-Ins";
-			this.checkBox_PllugIns.UseVisualStyleBackColor = true;
+			this.checkBox_PllugIns.UseVisualStyleBackColor = false;
 			this.checkBox_PllugIns.CheckedChanged += new System.EventHandler(this.checkBox_PllugIns_CheckedChanged);
 			// 
 			// checkBox_PresNonEDL
 			// 
 			this.checkBox_PresNonEDL.AutoSize = true;
+			this.checkBox_PresNonEDL.BackColor = System.Drawing.Color.Transparent;
 			this.checkBox_PresNonEDL.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBox_PresNonEDL.ForeColor = System.Drawing.SystemColors.Control;
 			this.checkBox_PresNonEDL.Location = new System.Drawing.Point(23, 509);
@@ -207,7 +218,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.checkBox_PresNonEDL.Size = new System.Drawing.Size(128, 25);
 			this.checkBox_PresNonEDL.TabIndex = 13;
 			this.checkBox_PresNonEDL.Text = "Non-EDL Data";
-			this.checkBox_PresNonEDL.UseVisualStyleBackColor = true;
+			this.checkBox_PresNonEDL.UseVisualStyleBackColor = false;
 			this.checkBox_PresNonEDL.CheckedChanged += new System.EventHandler(this.checkBox_PresNonEDL_CheckedChanged);
 			// 
 			// label4
@@ -215,7 +226,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.label4.AutoSize = true;
 			this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
 			this.label4.Font = new System.Drawing.Font("Ebrima", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.label4.ForeColor = System.Drawing.Color.White;
 			this.label4.Location = new System.Drawing.Point(19, 200);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(45, 20);
@@ -225,7 +236,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			// 
 			// comboBox1
 			// 
-			this.comboBox1.AllowDrop = true;
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Location = new System.Drawing.Point(23, 286);
 			this.comboBox1.Name = "comboBox1";
@@ -247,15 +258,14 @@ namespace Tidy_EDL_for_Pro_Tools
 			// button1
 			// 
 			this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(175)))), ((int)(((byte)(158)))));
+			this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(140)))), ((int)(((byte)(243)))));
 			this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(255)))), ((int)(((byte)(152)))));
-			this.button1.FlatAppearance.BorderSize = 3;
-			this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen;
+			this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(218)))), ((int)(((byte)(181)))));
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.button1.ForeColor = System.Drawing.Color.Snow;
 			this.button1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-			this.button1.Location = new System.Drawing.Point(262, 191);
+			this.button1.Location = new System.Drawing.Point(314, 191);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(85, 36);
 			this.button1.TabIndex = 19;
@@ -267,13 +277,16 @@ namespace Tidy_EDL_for_Pro_Tools
 			// 
 			this.listView1.AllowDrop = true;
 			this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(74)))), ((int)(((byte)(59)))));
-			this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.listView1.ForeColor = System.Drawing.SystemColors.Info;
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
+			this.listView1.LabelWrap = false;
 			this.listView1.Location = new System.Drawing.Point(12, 12);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(335, 173);
+			this.listView1.RightToLeftLayout = true;
+			this.listView1.Size = new System.Drawing.Size(387, 173);
 			this.listView1.TabIndex = 20;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.List;
@@ -284,7 +297,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.label1.AutoSize = true;
 			this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.label1.Font = new System.Drawing.Font("Ebrima", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.label1.ForeColor = System.Drawing.Color.White;
 			this.label1.Location = new System.Drawing.Point(68, 200);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(41, 20);
@@ -296,8 +309,9 @@ namespace Tidy_EDL_for_Pro_Tools
 			this.AcceptButton = this.button1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(94)))), ((int)(((byte)(79)))));
-			this.ClientSize = new System.Drawing.Size(363, 546);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(48)))), ((int)(((byte)(195)))));
+			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+			this.ClientSize = new System.Drawing.Size(411, 546);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.DragDropText);
 			this.Controls.Add(this.listView1);

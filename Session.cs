@@ -23,7 +23,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			PTParams.TrackUserDelay = true;
 			PTParams.TrackState = true;
 			PTParams.TrackPlugIns = true;
-			PTParams.PreserveNonEDLData = true;
+			PTParams.NonEDLData = true;
 		}
 
 		public static void SetEDLFormat(string formatName)
@@ -35,7 +35,7 @@ namespace Tidy_EDL_for_Pro_Tools
 		public static List<SessionData> AllSessionData = new List<SessionData>();
 		public static SessionInfoParams PTParams;
 
-		public static void ProcessObjectsAsEDL(ListViewItemCollection collection)
+		public static void ProcessCollectonsAsEDL(ListViewItemCollection collection)
 		{
 			AllRawTextData.Clear();
 			for (int i = 0; i < collection.Count; i++)

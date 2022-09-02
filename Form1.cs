@@ -30,7 +30,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			checkBox_ExUserDelay.Checked = Session.PTParams.TrackUserDelay;
 			checkBox_State.Checked = Session.PTParams.TrackState;
 			checkBox_PllugIns.Checked = Session.PTParams.TrackPlugIns;
-			checkBox_PresNonEDL.Checked = Session.PTParams.PreserveNonEDLData;
+			checkBox_PresNonEDL.Checked = Session.PTParams.NonEDLData;
 		}
 
 		public void ShowValidProcess(ListViewItem item, bool valid)
@@ -91,7 +91,7 @@ namespace Tidy_EDL_for_Pro_Tools
 		{
 			if (listView1.Items.Count < 1) return;
 
-			Session.ProcessObjectsAsEDL(listView1.Items);
+			Session.ProcessCollectonsAsEDL(listView1.Items);
 			Save();
 			//Save settings
 
@@ -146,7 +146,7 @@ namespace Tidy_EDL_for_Pro_Tools
 
 		private void checkBox_PresNonEDL_CheckedChanged(object sender, EventArgs e)
 		{
-			Session.PTParams.PreserveNonEDLData = checkBox_PresNonEDL.Checked;
+			Session.PTParams.NonEDLData = checkBox_PresNonEDL.Checked;
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,29 +201,9 @@ namespace Tidy_EDL_for_Pro_Tools
 
 		#endregion
 
-		
-
 		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			
-		}
-	}
-	public static class ListControlExtensions
-	{
-		public static object GetItemValue(this ListControl list, object item)
-		{
-			if (item == null)
-				throw new ArgumentNullException("item");
-
-			if (string.IsNullOrEmpty(list.ValueMember))
-				return item;
-
-			var property = TypeDescriptor.GetProperties(item)[list.ValueMember];
-			if (property == null)
-				throw new ArgumentException(
-					string.Format("item doesn't contain '{0}' property or column.",
-					list.ValueMember));
-			return property.GetValue(item);
 		}
 	}
 }

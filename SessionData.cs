@@ -16,6 +16,8 @@ namespace Tidy_EDL_for_Pro_Tools
 
 			public List<AudioTrackData> AudioTracks = new List<AudioTrackData>();
 
+			
+
 			public string PrintSessionInfo()
 			{
 				string s = "";
@@ -51,6 +53,8 @@ namespace Tidy_EDL_for_Pro_Tools
 					AudioTrackData track = AudioTracks[i];
 					s += track.PrintTrackData(highestCharCount, Session.PTParams);
 				}
+
+				if (!Session.PTParams.NonEDLData) s += NonEDLData;
 
 				return s;
 			}
@@ -102,5 +106,7 @@ namespace Tidy_EDL_for_Pro_Tools
 				return s;
 			}
 		}
+
+		
 	}
 }

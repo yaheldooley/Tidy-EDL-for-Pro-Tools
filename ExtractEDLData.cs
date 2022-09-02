@@ -24,24 +24,23 @@ namespace Tidy_EDL_for_Pro_Tools
 
 		public static SessionData GetSessionData(string allTextInFile)
 		{
-			MarkerData = "";
 			CapturedHeaders.Clear();
 
 			currentSession = new SessionData();
 
 			FindHeadersInString(allTextInFile);
 
-			if (CapturedHeaders.ContainsKey(HeadersPT[0])) FormatSessionInfo();
+			if (CapturedHeaders.ContainsKey(HeadersPT[0])) GetSessionFormatData();
 
-			//if (CapturedHeaders.ContainsKey(HeadersPT[1]))
-			//if (CapturedHeaders.ContainsKey(HeadersPT[2]))
-			//if (CapturedHeaders.ContainsKey(HeadersPT[3]))
-			//if (CapturedHeaders.ContainsKey(HeadersPT[4]))
+			if (CapturedHeaders.ContainsKey(HeadersPT[1])) currentSession.NonEDLData += $"{HeadersPT[1]}{CapturedHeaders[HeadersPT[1]]}";
+			if (CapturedHeaders.ContainsKey(HeadersPT[2])) currentSession.NonEDLData += $"{HeadersPT[2]}{CapturedHeaders[HeadersPT[2]]}";
+			if (CapturedHeaders.ContainsKey(HeadersPT[3])) currentSession.NonEDLData += $"{HeadersPT[3]}{CapturedHeaders[HeadersPT[3]]}";
+			if (CapturedHeaders.ContainsKey(HeadersPT[4])) currentSession.NonEDLData += $"{HeadersPT[4]}{CapturedHeaders[HeadersPT[4]]}";
 
 			if (CapturedHeaders.ContainsKey(HeadersPT[5])) GetTrackListingData();
-			
 
-			
+			if (CapturedHeaders.ContainsKey(HeadersPT[6])) currentSession.NonEDLData += $"{HeadersPT[6]}{CapturedHeaders[HeadersPT[6]]}";
+
 			return currentSession;
 		}
 
@@ -71,7 +70,7 @@ namespace Tidy_EDL_for_Pro_Tools
 			}
 		}
 
-		private static void FormatSessionInfo()
+		private static void GetSessionFormatData()
 		{
 			///		Data by Index
 			//////	Session Name.
@@ -134,8 +133,6 @@ namespace Tidy_EDL_for_Pro_Tools
 			}
 		}
 
-		public static string MarkerData = "";
-
 		public static void GetTrackListingData()
 		{
 			string[] rawTrackData = SplitStringByString(CapturedHeaders[HeadersPT[5]], "TRACK NAME:");
@@ -158,7 +155,8 @@ namespace Tidy_EDL_for_Pro_Tools
 
 				
 				AudioTrackData audioTrack = new AudioTrackData();
-				audioTrack.TrackName = Tidy(validTrackData[0]);
+				audioTrack.TrackName = TrimTabAndReturns(validTrackData[0]);
+				
 				audioTrack.Comments = RemoveStringBeforeAndWhiteSpaces(validTrackData[1], "COMMENTS:");
 				audioTrack.UserDelay = RemoveStringBeforeAndWhiteSpaces(validTrackData[2], "USER DELAY:");
 				audioTrack.State = RemoveStringBeforeAndWhiteSpaces(validTrackData[3], "STATE:");
@@ -180,41 +178,52 @@ namespace Tidy_EDL_for_Pro_Tools
 				List<string> validClipData = new List<string>();
 				for (int i = clipStartPos; i < validTrackData.Count; i++) { validClipData.Add(validTrackData[i]); }
 
-				char[] clipDataSplitters = new char[] {'\t', ' '};
 				for (int c = 0; c < validClipData.Count; c++)
 				{
 					AudioClipData clip = new AudioClipData();
-					string[] clipDataLines = Regex.Split(validClipData[c], @"\s{2,}");
-					for (int i = 0; i < clipDataLines.Length; i++)
-					{
-						Console.WriteLine($"=====ClipData positon {i} start====");
-						Console.WriteLine($"{clipDataLines[i]}");
-						Console.WriteLine($"=====ClipData positon {i} end====");
-					}
-					
-					//if (clipDataLines.Length < 7) break; // something was removed from EDL
+
+					string[] clipDataLines = validClipData[c].Split(new string[] {"   ", "\t"}, StringSplitOptions.RemoveEmptyEntries);
+					clipDataLines = Tidy(clipDataLines);
+
+					/// Index 0 is Channel Number
+					/// Index 1 is Event Number (Order)
+					/// Index 2 Filename
+					/// Index 3 Start Timecode
+					/// Index 4 End Timecode
+					/// Index 5 Duration Timecode + State
+
 					int channel = 1;
-					int.TryParse(clipDataLines[0].Trim(), out channel);
+					int.TryParse(clipDataLines[0], out channel);
 					if (channel > 1) break;
 
-					if (Session.PTParams.ExcludeExtensions) clip.ClipName = SimplifyClipName(Tidy(clipDataLines[2]));
-					else clip.ClipName = Tidy(clipDataLines[2]);
-
-					bool fadeTrack = clip.ClipName == "(fade out)" || clip.ClipName == "(fade in)" || clip.ClipName == "(cross fade)";
-					if (Session.PTParams.ExcludeFades && fadeTrack)
+					bool fadeTrack = false;
+					if (clipDataLines.Length > 2)
 					{
-						continue;
+						string[] nameAndExt = SeparateExtensionFromFilename(TrimTabAndReturns(clipDataLines[2]), out fadeTrack);
+
+						if (Session.PTParams.ExcludeExtensions) clip.ClipName = TrimTabAndReturns(nameAndExt[0]);
+						else clip.ClipName = TrimTabAndReturns(nameAndExt[0]) + nameAndExt[1];
 					}
-					else if (Session.PTParams.ExcludeEmptyTracks && clip.ClipName == "") continue;
+
+					if (Session.PTParams.ExcludeFades && fadeTrack)
+						continue;
+					
+					else if (Session.PTParams.ExcludeEmptyTracks && clip.ClipName == "") 
+						continue;
+
 					else
 					{
-						if (clip.ClipName.Length > audioTrack.MaxCharactersInTrackNames)
-						{
+						bool isLargestString = clip.ClipName.Length > audioTrack.MaxCharactersInTrackNames;
+
+						if (isLargestString)
 							audioTrack.MaxCharactersInTrackNames = clip.ClipName.Length;
-						}
-						clip.StartTime = Tidy(clipDataLines[3]);
-						clip.EndTime = Tidy(clipDataLines[4]);
-						clip.Duration = Tidy(clipDataLines[5]);
+						
+						clip.StartTime = clipDataLines[3];
+
+						clip.EndTime = clipDataLines[4];
+
+						clip.Duration = clipDataLines[5];
+
 						if (clip.Duration.Contains("Unmuted"))
 						{
 							clip.Duration = clip.Duration.Replace("Unmuted", "");
@@ -228,48 +237,84 @@ namespace Tidy_EDL_for_Pro_Tools
 
 						audioTrack.AudioClips.Add(clip);
 					}
-
 				}
-				
 			}
 			currentSession.AudioTracks = allTracks;
 		}
 
-		private static string Tidy(string oldString)
+		private static string[] extArray = new string[] {
+			".aif", ".AIF", 
+			".wav", ".WAV", 
+			".mp3", ".MP3", 
+			".mov", ".MOV",
+			".L", ".R", ".C", ".Ls", ".Rs", ".LFE", ".Lfe"};
+		private static string[] SeparateExtensionFromFilename(string fileName, out bool fade)
+		{		
+			string clipName = string.Empty;
+			string extension = string.Empty;
+
+			if (fileName == "(fade out)" || fileName == "(fade in)" || fileName == "(cross fade)")
+			{
+				clipName = fileName;
+				fade = true;
+			}
+			else fade = false;
+
+			if (!fade) //Keep Searching for extension
+			{
+				foreach (string ext in extArray)
+				{
+					if (fileName.Contains(ext))
+					{
+						string[] resultArray = SplitStringByString(fileName, ext);
+						clipName = resultArray[0];
+						extension = ext;
+						break;
+					}
+				}
+			}
+			
+			return new string[] { clipName, extension };
+		}
+
+		private static void DebugDataInClipDataLines(string[] clipDataLines)
+		{
+			for (int i = 0; i < clipDataLines.Length; i++)
+			{
+				Console.WriteLine($"=====ClipData positon {i} start====");
+				Console.WriteLine($"{clipDataLines[i]}");
+				Console.WriteLine($"=====ClipData positon {i} end====");
+			}
+		}
+
+		private static string ByteStringFromString(string thisString)
+		{
+			string value = string.Empty;
+			foreach (byte b in System.Text.Encoding.UTF8.GetBytes(thisString.ToCharArray()))
+			{
+				value += b.ToString() + ", ";
+				Console.WriteLine(b.ToString());
+			}
+				
+			return value;
+		}
+
+		private static string TrimTabAndReturns(string oldString)
 		{
 			string cleanString = oldString;
-			oldString.Trim('\t','\n');
-			oldString.Trim();
+			cleanString = cleanString.Trim('\t','\n');
+			cleanString = cleanString.Trim();
 			return cleanString;
 		}
 
-		public static string SimplifyClipName(string oldName)
+		private static string[] Tidy(string[] strings)
 		{
-			
-			string strCopy = oldName;
-			if (strCopy.Contains(".aif"))
+			for (int i = 0; i < strings.Length; i++)
 			{
-				string[] resultArray = SplitStringByString(strCopy, ".aif");
-				strCopy = resultArray[0];
+				strings[i] = strings[i].Trim('\t', '\n');
+				strings[i] = strings[i].Trim();
 			}
-			else if (strCopy.Contains(".wav"))
-			{
-				string[] resultArray = SplitStringByString(strCopy, ".wav");
-				strCopy = resultArray[0];
-			}
-			else if (strCopy.Contains(".mp3"))
-			{
-				string[] resultArray = SplitStringByString(strCopy, ".mp3");
-				strCopy = resultArray[0];
-			}
-			else if (strCopy.Contains(".mov"))
-			{
-				string[] resultArray = SplitStringByString(strCopy, ".mov");
-				strCopy = resultArray[0];
-			}
-
-
-			return strCopy;
+			return strings;
 		}
 
 		public static string FindStringBetween(string strSource, string strStart, string strEnd)
@@ -325,7 +370,7 @@ namespace Tidy_EDL_for_Pro_Tools
 		public bool TrackState = false;
 		public bool TrackPlugIns = false;
 		
-		public bool PreserveNonEDLData = false;
+		public bool NonEDLData = false;
 
 		public IEnumerable<string> TrueBools
 		{
